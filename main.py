@@ -24,13 +24,14 @@ tokenisedtext = tagger(testsentence)
 # print(tokenisedtext)
 
 for token in tokenisedtext:
-   
-    r = Word.request(token.surface)
-    if token.surface not in '、。？！':
+   pos = token.pos.split(',')[0]
+   skip_pos = ['助動詞', '助詞', '記号', '補助記号']
+   r = Word.request(token.surface)
+   if token.surface not in '、。？！' and pos not in skip_pos:
         print(token.surface,  r.data[0].senses[0].parts_of_speech, r.data[0].senses[0].english_definitions)
-    else:
+   else:
         print(token.surface)
-#some issues, でした taken to be two nouns instead of grammatical marker
+
 #     # print(f"Surface: {word.surface}")
 #     # print(f"Features: {word.feature.lemma}")
 #     r = word.request(text)
@@ -41,3 +42,4 @@ for token in tokenisedtext:
     #     print("Part of speech: N/A")
     # print("---")
 # looks through a video link you send it to create a transcript, then teases out useful vocab and grammar for everyday speech
+
