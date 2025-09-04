@@ -26,7 +26,11 @@ tokenisedtext = tagger(testsentence)
 for token in tokenisedtext:
    
     r = Word.request(token.surface)
-    print(r.data[0].senses[0].english_definitions)
+    if token.surface not in '、。？！':
+        print(token.surface,  r.data[0].senses[0].parts_of_speech, r.data[0].senses[0].english_definitions)
+    else:
+        print(token.surface)
+#some issues, でした taken to be two nouns instead of grammatical marker
 #     # print(f"Surface: {word.surface}")
 #     # print(f"Features: {word.feature.lemma}")
 #     r = word.request(text)
@@ -37,4 +41,3 @@ for token in tokenisedtext:
     #     print("Part of speech: N/A")
     # print("---")
 # looks through a video link you send it to create a transcript, then teases out useful vocab and grammar for everyday speech
-
